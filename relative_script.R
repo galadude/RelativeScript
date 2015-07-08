@@ -1,11 +1,15 @@
 # Michael Glen Galanakis, 2015
 # mgalanakis@sund.ku.dk
 # 
-# Progeny relatives scripts version 1.0.0
+# Progeny relatives scripts version 1.0.1
 # 
 # This script provides the function "relative" which allows the user to 
 # indicate wether an individual has a n-degree relative with a curtain condition.
 # The script requires the package kinship2. 
+#
+# The "relatives" functions only accepts progeny output of a certain form.
+# The first six columns MUST be: Global.ID, Gender, UPN, Mother.ID, Father.ID,
+# and Pedigree.name. These columns must also keep their names. 
 
 
 library(kinship2)
