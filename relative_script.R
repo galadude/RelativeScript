@@ -73,8 +73,8 @@ relatives <- function(x, k, n) {
   }
   
   # exceptions
-  if (length(k) != nrow(x)) stop("k and data must have same size.")
-  if (typeof(k) != "logical") stop("k must be of type logical.")
+  if (length(k) != nrow(x)) stop("criteria and data must have same size.")
+  if (typeof(k) != "logical") stop("criteria must be of type logical.")
   if ("temp" %in% names(x)) stop("The column name \"temp\" is reserved,
                                  don't use it.")
   if ("id" %in% names(x)) stop("The column name \"id\" is reserved,
