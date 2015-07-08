@@ -7,19 +7,13 @@
 # indicate wether an individual has a n-degree relative with a curtain condition.
 # The script requires the package kinship2. 
 
-# This function returns the 'phantom parent' which is used
-# to replace missing parents. It takes the input parameters:
-# UPN, the id; sex, whether a individual is male or female; and
-# ped, the pedigree the parent belongs to.
 
 library(kinship2)
 library(plyr)
 
-source
+source("RelativeScript/fix.R")
 
-MakeParent <- function (UPN, sex, ped) {
-  return (c('phantom1', sex, UPN, 0, 0, ped, NA, NA, F))
-}
+
 
 # The function ped_relatives takes two input parameters:
 # x, a data set where all rows belong to the same pedigree;
@@ -62,6 +56,18 @@ ped_relatives <- function(x, n) {
 # a n-degree relative to an affected row.
 
 relatives <- function(x, k, n) {
+  if (!identical(names(x)[1:6], c("Global.ID", "Gender", "UPN", "Mother.ID",
+                         "Father.ID", "Pedigree.name"))) stop("column names!")
+      
+  # This function returns the 'phantom parent' which is used
+  # to replace missing parents. It takes the input parameters:
+  # UPN, the id; sex, whether a individual is male or female; and
+  # ped, the pedigree the parent belongs to.
+  MakeParent <- function (UPN, sex, ped) {
+    nas <- rep(NA, dim(x)[2])
+    return (c('phantom1', sex, UPN, 0, 0, ped, nas))
+  }
+  
   # exceptions
   if (length(k) != nrow(x)) stop("k and data must have same size.")
   if (typeof(k) != "logical") stop("k must be of type logical.")

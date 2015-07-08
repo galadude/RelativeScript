@@ -21,14 +21,14 @@ Counter <- setRefClass(
         c <<- c + 1
         newUPN <- c + m
         
-        father <- make_parents(newUPN,'male',sibs[1,]$Pedigree.name)
+        father <- make_parents(newUPN,'M',sibs[1,]$Pedigree.name)
         sibs$Father.ID <- newUPN                
         sibs <- rbind(father,sibs)
       } else if(sibs[1,]$Mother.ID == 0 & sibs[1,]$Father.ID != 0 ) {
         c <<- c + 1
         newUPN <- c + m
         
-        mother <- make_parents(newUPN,'female',sibs[1,]$Pedigree.name)
+        mother <- make_parents(newUPN,'F',sibs[1,]$Pedigree.name)
         sibs$Mother.ID <- newUPN
         sibs <- rbind(sibs,mother)
       }
